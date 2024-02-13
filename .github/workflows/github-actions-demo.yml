@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-run-name: ${{ github.actor }} paks teszt
+run-name: paks teszt
 on: [push]
 jobs:
   Explore-GitHub-Actions:
@@ -7,5 +7,11 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - run: ( date -u -Iminutes ; curl https://atomeromu.mvm.hu/ -k -s | sed -n 's|^.*dominant-baseline[^>]*>\([0-9\.]*\)<.*$|\1|p' | head -4 ) | tr '\r\n' ',' >> paks.csv
-      - run: cat paks.csv
+      - uses: actions/checkout@v4
+      - run: |
+          ( date -u -Iminutes ; curl https://atomeromu.mvm.hu/ -k -s | sed -n 's|^.*dominant-baseline[^>]*>\([0-9\.]*\)<.*$|\1|p' | head -4 ) | tr '\r\n' ',' | rev | cut -c 2- | rev >> paks.csv
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "update"
+          git push
