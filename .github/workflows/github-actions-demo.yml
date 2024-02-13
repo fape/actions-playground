@@ -9,8 +9,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - uses: actions/checkout@v4
-      - run: |
+      - name: update values 
+        run: |
           ( date -u '+%Y.%m.%d %H:%M' ; curl https://atomeromu.mvm.hu/ -k -s | sed -n 's|^.*dominant-baseline[^>]*>\([0-9\.]*\)<.*$|\1|p' | head -4 | tr '.' ',' ) | tr '\r\n' ';' | rev | cut -c 2- | rev >> paks.csv
           git config user.name github-actions
           git config user.email github-actions@github.com
