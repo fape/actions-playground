@@ -1,6 +1,8 @@
 name: GitHub Actions Demo
 run-name: paks teszt
-on: [push]
+on:
+  schedule:
+  - cron: '*/5 * * * *'
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
