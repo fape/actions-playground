@@ -2,8 +2,8 @@ name: GitHub Actions Demo
 run-name: paks teszt
 on:
   workflow_dispatch:
-  schedule:
-    - cron:  '*/5 * * * *'
+  #schedule:
+  #  - cron:  '*/5 * * * *'
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
